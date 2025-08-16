@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>RMS - Reservations, Add a new reservation</title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <!-- ------------------------------ -->
+  <link rel="stylesheet" href="../css/add-section.css">
+<!--  -->
+<!--  <style>-->
+<!--    /* .page-header{-->
+<!--      margin:0 !important;-->
+<!--      border-radius: 0px; -->
+<!--    } */-->
+
+<!--    section{-->
+<!--      overflow: hidden;-->
+<!--      /* background-color: red; */-->
+<!--      background-color: rgba(93, 0, 136, 0.808);-->
+<!--      background-blend-mode: multiply;-->
+
+<!--      background-image: url('../assets/img/curved-images/curved14.jpg');-->
+<!--      background-position: center;-->
+<!--      background-size: cover;-->
+<!--      background-repeat: no-repeat;-->
+<!--      background-attachment: fixed;-->
+<!--    }-->
+
+<!--    section .card{-->
+<!--      border-radius: 20px;-->
+<!--    }-->
+<!--  </style>-->
+</head>
+
+<!-- <body class="g-sidenav-show bg-gray-100"> -->
+<body>
+  <section class="min-vh-100">
+  <!-- <section class=""> -->
+
+      <div class="row m-2 pt-2">
+
+        <div class="col-xl-5 col-lg-6 col-md-7 mx-auto m-3">
+
+          <div class="card z-index-0">
+            <h1 class="p-3 pb-0 pt-3 display-3 text-center text-primary">Reservation</h1>
+
+            <h5 class="lead text-center">Create a new reservation</h5>
+
+            <div class="card-body">
+              <form role="form text-left" method="POST" th:object="${reservationDTO}">
+
+                <div th:if="${errors}" class="alert alert-danger p-1 mb-2 small">
+                  <p class="mb-0" th:text="${errors}"></p>
+                </div>
+
+                <label>Main Guest (Payer) information</label>
+                <div class="mb-2">
+                  <input type="text" th:field="*{customerGroup.firstName}" class="form-control" placeholder="First name(s)" aria-label="Name" aria-describedby="email-addon">
+                </div>
+                <div class="mb-2">
+                  <input type="text" th:field="*{customerGroup.lastName}" class="form-control" placeholder="Last name" aria-label="Name" aria-describedby="email-addon">
+                </div>
+                <div class="mb-3">
+                  <input type="tel" th:field="*{customerGroup.phoneNumber}" class="form-control" placeholder="Phone number" aria-label="Email" aria-describedby="email-addon">
+                  <div th:if="${#fields.hasErrors('customerGroup.phoneNumber')}" class="text-danger">
+                    <p th:errors="*{customerGroup.phoneNumber}"></p>
+                  </div>
+                </div>
+
+                <div th:if="${errors}" class="alert alert-danger p-1 mb-2 small">
+                  <p class="mb-0" th:text="${errors}"></p>
+                </div>
+
+                <!-- <p>Reservation information</p> -->
+                <label> Reservation Information</label>
+                <div class="mb-2">
+                  <label class="form-label">Reservation Date & Time</label>
+                  <input type="datetime-local" th:field="${reservationDTO.reservationDateTime}" class="form-control" placeholder="Reservation Date and Time" aria-label="Date and Time" aria-describedby="email-addon">
+                </div>
+                <div class="mb-2">
+                  <label class="form-label">Reservation Maximum Time (Minutes)</label>
+                  <input type="number" th:field="${reservationDTO.reservationTimeMax}" class="form-control" placeholder="Max Time" aria-label="Time" aria-describedby="email-addon">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Reservation Start Time</label>
+                  <input type="datetime-local" th:field="${reservationDTO.reservationTimeStart}" class="form-control" placeholder="Start Time" aria-label="Time" aria-describedby="email-addon">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Reservation End Time</label>
+                  <input type="datetime-local" th:field="${reservationDTO.reservationTimeEnd}" class="form-control" placeholder="End Time" aria-label="Time" aria-describedby="email-addon">
+                </div>
+
+                <!-- <p>Table information</p> -->
+                <label>Table information</label>
+                <div class="mb-2">
+                  <label class="form-label">Table Number(s)</label>
+                  <input type="text" th:field="${reservationDTO.tableId}" class="form-control" placeholder="Table number(s)">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Number of People</label>
+                  <input type="number" th:field="*{customerGroup.numberOfPeople}" class="form-control" placeholder="Number of guests">
+                </div>
+
+<!--                <div class="text-center">-->
+<!--                  <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">-->
+<!--                    Create reservation -->
+<!--                  </button>-->
+<!--                </div>-->
+
+                <div class="row mb-3">
+                  <div class="col-sm-6 d-grid">
+<!--                  <div class="offset-sm-4 col-sm-6 d-grid">-->
+                    <button type="submit" class="btn btn-primary">Add Reservation</button>
+                  </div>
+
+                  <div class="col-sm-6 d-grid">
+                    <a class="btn btn-outline-primary" href="/reservations">Cancel</a>
+                  </div>
+                </div>
+
+                <!--  approach2 -->
+<!--                <div class="text-center">-->
+<!--                  <button type="submit" class="btn btn-primary">-->
+<!--                   Add Reservation-->
+<!--                  </button>-->
+<!--                  <a href="/reservations" class="btn btn-outline-primary">Cancel</a>-->
+<!--                </div>-->
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <!--   Core JS Files   -->
+  <!-- <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    } -->
+  <!-- </script> -->
+
+  <!-- Github buttons -->
+  <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
+
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <!-- <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script> -->
+</body>
+
+</html>

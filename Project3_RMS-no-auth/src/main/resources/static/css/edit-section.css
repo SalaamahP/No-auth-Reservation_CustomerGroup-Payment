@@ -1,0 +1,54 @@
+/*
+edit.css
+========
+*/
+
+body {
+    background: #26012d;
+    color: white;
+}
+
+
+        .form-container{
+        margin:7vh 0px;
+    border: 1px solid purple;
+    background: #0000006b;
+    padding: 20px;
+}
+
+        .form-container h2{
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+        /*
+        form{
+        padding:20px;
+        }
+        */
+        input{
+            max-width:250px;
+        }
+
+        textarea{
+            max-width:530px;
+        }
+        <!-- ========================= -->
+
+        .center{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        /* BOOTSTRAP OVERRIDES */
+        .container-fluid{
+            padding:20px;
+        }
+
+        .form-control-plaintext{
+            color:aqua;
+        }
+        <!-- ========================= -->
+

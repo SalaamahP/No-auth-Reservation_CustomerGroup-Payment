@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shifts</title>
+    <style>
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            color: #eee;
+            font-size: 1.125rem;
+            font-family: system-ui;
+            line-height: 1.5;
+        }
+
+        .wrapper {
+            width: min(900px, calc(100% - 3rem));
+            margin-inline: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            background-color: #323232;
+            width: 100%;
+            margin: 25px 0;
+            border-radius: 5px 5px 0;
+            overflow:  hidden;
+            box-shadow: 0 020px rgba(0,0,0,0.15);
+        }
+
+        th,
+        caption,
+        td {
+            background: white;
+            padding: 1rem;
+        }
+
+        caption,
+        th {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        caption {
+            background: hsl(0 0% 0%);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        th {
+            background: hsl(0 0% 0% / 0.5);
+        }
+
+        tr:nth-of-type(2n) {
+            background: hsl(0 0% 0% / 0.1);
+        }
+
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        tr{
+            border-bottom: 1px solid white;
+        }
+
+        @media (max-width: 650px) {
+            th {
+                display: none;
+            }
+
+            td {
+                display: block;
+            }
+
+            td::before {
+                content: attr(data-cell) ": ";
+                font-weight: 700;
+                text-transform: capitalize;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div class="wrapper">
+        <h1>Employee Shifts Table</h1>
+
+        <div class="table-container">  
+            <table>
+                <caption>Employee Shifts</caption>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee First Name</th>
+                    <th>Employee Start Time</th>
+                    <th>Employee End Time</th>
+                </tr>
+                <tr>
+                    <td data-cell="Employee ID">101</td>
+                    <td data-cell="Name">Jane</td>
+                    <td data-cell="Start Time">08:00</td>
+                    <td data-cell="End Time">16:00</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>RMS - Orders, Add a new order</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet"/>
+
+    <!-- ------------------------------ -->
+    <link rel="stylesheet" href="../css/add-section.css">
+
+    <style>
+
+    </style>
+</head>
+
+<!-- <body class="g-sidenav-show bg-gray-100"> -->
+<body>
+<section class="min-vh-100">
+    <!-- <section class=""> -->
+
+    <div class="row m-2 pt-2">
+
+        <div class="col-xl-5 col-lg-6 col-md-7 mx-auto m-3">
+
+            <div class="card z-index-0">
+                <h1 class="p-3 pb-0 pt-3 display-3 text-center text-primary">Order</h1>
+
+                <h5 class="lead text-center">Create a new order</h5>
+
+                <div class="card-body">
+<!--                    <form role="form text-left" method="POST">-->
+                        <form role="form text-left" method="POST" th:object="${orderDTO}">
+                            <label>Estimated wait-time</label>
+                            <div class="mb-3">
+                                <input class="form-control"
+                                       type="number"
+                                       th:field="${orderDTO.estimatedWaitTime}"
+                                       placeholder="Estimated wait-time">
+
+                            </div>
+
+                            <label>Total Price</label>
+                            <div class="mb-3">
+                                <input class="form-control"
+                                       type="number"
+
+                                       th:field="${orderDTO.totalPrice}"
+                                       placeholder="Total price">
+
+                            </div>
+
+
+<!--                            <div class="mb-3">-->
+<!--                                <input class="form-control"-->
+<!--                                       th:field="${orderDTO.status}"-->
+<!--                                       placeholder="Status">-->
+
+<!--                            </div>-->
+
+                            <label>Order status</label>
+<!--                            <label class="text-light lead">Order status</label>-->
+                            <div class="mb-3">
+                                <select class="form-select" th:field="${orderDTO.status}">
+                                    <option value="Not-started">Not-started</option>
+                                    <option value="In-progress">In-progress</option>
+                                    <option value="Complete">Complete</option>
+                                </select>
+
+                                <p th:if="${#fields.hasErrors('status')}"
+                                   th:errorclass="text-danger"
+                                   th:errors="${orderDTO.status}">
+                                </p>
+                            </div>
+
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Order details</label>
+                            <textarea
+                                    class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    placeholder="Example, \n- Item #12, x1"
+                            ></textarea>
+                        </div>
+
+
+                        <label>Table information</label>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Table number(s)">
+                        </div>
+
+                        <!-- buttons -->
+                            <div class="row mb-3">
+                                <div class="offset-sm-4 col-sm-4 d-grid">
+                                    <button type="submit" class="btn btn-primary">Add Order</button>
+                                </div>
+
+                                <div class="col-sm-4 d-grid">
+                                    <a class="btn btn-outline-primary" href="/orders">Cancel</a>
+                                </div>
+                            </div>
+
+<!--                            approach2 -->
+<!--                        <div class="text-center">-->
+<!--                            <button type="submit" class="btn btn-primary">-->
+<!--                                Create order-->
+<!--                            </button>-->
+<!--                            <a href="/orders" class="btn btn-outline-primary">Cancel</a>-->
+<!--                        </div>-->
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+<!--   Core JS Files   -->
+<!-- <script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script>
+  var win = navigator.platform.indexOf('Win') > -1;
+  if (win && document.querySelector('#sidenav-scrollbar')) {
+    var options = {
+      damping: '0.5'
+    }
+    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+  } -->
+<!-- </script> -->
+
+<!-- Github buttons -->
+<!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
+
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<!-- <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shifts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2> EMPLOYEE SHIFTS</h2>
+
+
+
+<table class="table table-bordered">
+    <tr  align = "center">
+        <th width="100">Employee ID</th>
+        <th width="100">Start Time</th>
+        <th width="100">End Time</th>
+    </tr>
+    <tr align = "center">
+        <td th:text="${EmployeeShiftDTO.id}"></td>
+        <td th:text="${EmployeeShiftDTO.startTime}"></td>
+        <td th:text="${EmployeeShiftDTO.endTime}"></td>
+    <tr th:each="shift : ${EmployeeShift}">
+        <td th:text="${shift.id}"></td>
+        <td th:text="${shift.startTime}"></td>
+        <td th:text="${shift.endTime}"></td>
+    </tr>
+    </tr>
+</table>
+</body>
+</html>

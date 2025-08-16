@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>RMS - Customer Payments, List</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show bg-gray-100" onload="">
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+         navbar-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <h5 class="pt-3 display-6 text-primary">Customer Payments</h5>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>All Customer Payments</h6>
+
+                        <p>Number of payments: <span th:text="${payments.size()}"></span></p>
+                        <!--                        <h6 class="mb-0 text-sm emp-name" th:text="${emp.empFirstName + '  ' + emp.empLastName}"></h6>-->
+
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th>Customer Group Id</th>
+                                    <th>Payment Id</th>
+                                    <th class="text-center">Date and Time</th>
+                                    <th class="text-center">Amount</th>
+                                    <th class="text-center">Transaction Type</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <tr th:each="payment : ${payments}">
+                                    <td class="align-middle text-center" th:text="${payment.customerGroup.customerGroupId}"></td>
+                                    <td class="align-middle text-center" th:text="${payment.paymentId}"></td>
+                                    <td class="align-middle text-center" th:text="${#temporals.format(payment.paymentDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                                    <td class="align-middle text-center" th:text="${payment.paymentAmount}"></td>
+                                    <td class="align-middle text-center" th:text="${payment.paymentTransactionType}"></td>
+
+
+                                    <td class="align-middle">
+                                        <a
+                                                th:href="@{/payments/edit(paymentId=${payment.paymentId})}"
+                                                class="text-info font-weight-bold text-xs"
+                                                data-toggle="tooltip"
+                                                data-original-title="Edit user">
+                                            Edit
+                                        </a>
+                                    </td>
+
+
+                                    <td class="align-middle">
+                                        <a
+                                                th:href="@{/payments/delete(paymentId=${payment.paymentId})}"
+                                                class="text-danger font-weight-bold text-xs"
+                                                data-toggle="tooltip"
+                                                onclick="return confirm('Are you sure?')"
+                                        >
+                                            Remove
+                                        </a>
+                                    </td>
+
+<!--                                    <td class="align-middle">-->
+<!--                                        <a th:href="@{/payments/add(customerGroupId=${reservation.customerGroup.customerGroupId})}"-->
+<!--                                           class="btn btn-sm btn-outline-primary">-->
+<!--                                            Add Payment-->
+<!--                                        </a>-->
+<!--                                    </td>-->
+
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <div class="sidenav-footer mx-3 col-12 col-md-6">
+                <a class="btn bg-gradient-primary mt-2 w-50" href="/reservations/list" type="button">
+                    Go back
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+
+</body>
+</html>
