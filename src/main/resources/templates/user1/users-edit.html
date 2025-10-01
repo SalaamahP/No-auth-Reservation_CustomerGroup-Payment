@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Edit User</title></head>
+<body>
+<h1>Edit User</h1>
+<form th:action="@{/users/update}" th:object="${userDTO}" method="post">
+    <input type="hidden" th:field="*{userId}" />
+    <label>Username: <input type="text" th:field="*{username}" /></label><br/>
+    <label>Password: <input type="password" th:field="*{password}" /></label><br/>
+    <label>Role: <input type="text" th:field="*{role}" /></label><br/>
+    <label>Employee:
+        <select th:field="*{employeeId}">
+            <option th:each="e: ${employees}" th:value="${e.id}" th:text="${e.empFirstName + ' ' + e.empLastName}"
+                    th:selected="${e.id == userDTO.employeeId}"></option>
+        </select>
+    </label><br/>
+    <button type="submit">Update</button>
+</form>
+<a th:href="@{/users}">Back to list</a>
+</body>
+</html>
+
+</html>

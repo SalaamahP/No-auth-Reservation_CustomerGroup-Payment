@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Edit User</title>
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <!-- ------------------------------ -->
+<!--    <link rel="stylesheet" href="../css/add-section.css">-->
+  <style>
+        section{
+          overflow: hidden;
+          background-color: rgba(93, 0, 136, 0.808);
+          background-blend-mode: multiply;
+
+          background-image: url('../assets/img/curved-images/curved14.jpg');
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        }
+
+        section .card{
+          background-color: rgba(0, 0, 0, 0.5);
+          border-radius: 20px;
+          box-shadow: 1px 1px 10px rgb(0, 0, 0)
+<!--box-shadow: 0px 2px 10px rgb(0, 0, 0);-->
+          transition:400ms ease;
+        }
+
+section .card:hover {
+    box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+        .col-form-label {
+            font-weight: 300;
+            color: white;
+        }
+
+        .form-control-plaintext {
+            outline: none;
+            color: #cb0c9f;
+        }
+
+<!--        mine -->
+<!--        .center{-->
+<!--            display:flex;-->
+<!--            justify-content:center;-->
+<!--            align-items:center;-->
+<!--        }-->
+  </style>
+</head>
+
+<body>
+<section class="min-vh-100">
+    <div class="row m-2 mt-5">
+
+        <div class="col-xl-5 col-lg-7 col-md-8 mx-auto">
+            <div class="card z-index-0">
+                <!-- <h1 class="pb-0 pt-4 text-start px-4 text-light">Employee</h1> -->
+                <!--              <h2 class="display-6 mb-3">Edit employee details</h2>-->
+
+                <h3 class="text-start text-light px-4 pt-5">Edit user details</h3>
+
+                <div class="card-body">
+                    <form role="form text-left" method="POST" enctype="multipart/form-data">
+
+                        <input type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}" />
+
+                        <!-- Identity -->
+                        <div class="row mb-0">
+                            <label class="col-5 col-form-label">Identity-number</label>
+                            <div class="col-4
+                          ">
+                                <input class="form-control-plaintext" readonly
+                                       th:value="${employee.id}">
+                            </div>
+                        </div>
+
+                        <!-- created at-->
+                        <div class="row mb-3">
+                            <label class="col-5 col-form-label">Created at</label>
+                            <div class="col-6">
+                                <input readonly
+                                       class="form-control-plaintext"
+                                       th:value="${employee.empStartDate}">
+                            </div>
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div class="row mb-3">
+                            <label class="col-sm-5 col-form-label">First name(s)</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" th:field="${employee.empFirstName}">
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-5 col-form-label">Last name</label>
+                            <div class="col-sm-5">
+                                <input class="form-control" th:field="${employee.empLastName}">
+
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-5">
+                            <label class="col-sm-5 col-form-label">Role</label>
+                            <div class="col-sm-5">
+                                <select class="form-select" th:field="${employeeDTO.role}">
+                                    <option value="Kitchen-staff member">Kitchen-staff member</option>
+                                    <option value="Waiter">Waiter</option>
+                                    <option value="Manager">Manager</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+
+                        <!-- buttons -->
+                        <div class="row mb-1 ms-1" style="">
+                            <button type="submit" class="btn btn-primary w-25">Update</button>
+                            <a href="/users" class="btn btn-outline-primary w-25 mx-3">Cancel</a>
+                        </div>
+
+                        <!-- <div class="row mb-3 ms-1" style="width:200px;">
+                            <a href="/employees" class="btn btn-outline-primary">Cancel</a>
+                        </div> -->
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+<!--   Core JS Files   -->
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+
+</body>
+</html>

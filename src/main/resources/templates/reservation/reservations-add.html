@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Add a new reservation</title>
+
+    <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <!-- ------------------------------ -->
+  <link rel="stylesheet" href="../css/section-add.css">
+<!--  <link rel="stylesheet" href="../css/add-section.css">-->
+  <style>
+    .col-form-label {
+  font-weight: 300;
+  color: white;
+  margin: 0px;
+}
+
+    p{
+      margin:0;
+      color:white;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section class="min-vh-100">
+      <div class="row m-2 pt-2">
+
+        <div class="col-xl-5 col-lg-6 col-md-7 mx-auto m-3">
+
+          <div class="card z-index-0">
+<!--            <h1 class="p-3 pb-0 pt-3 display-3 text-center text-primary">Reservation</h1>-->
+<!--            <h5 class="lead text-center">Add a new reservation</h5>-->
+
+              <h3 class="text-center text-light px-4 pt-5">Add reservation details</h3>
+
+              <div th:if="${doubleErrors}" class="aler alert-warning">
+                  <p th:text="${doubleErrors}"></p>
+              </div>
+
+            <div class="card-body">
+              <form role="form text-left" method="POST" th:object="${reservationDTO}">
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}" />
+
+<!--                <label>Main Guest (Payer) information</label>-->
+<!--                <p class="text-center mb-3">Main Guest (Payer) information</p>-->
+                <p class="mb-3 fw-bold">Main Guest (Payer) information</p>
+<!--                <h6 class="mb-3">Main Guest (Payer) information</h6>-->
+                <div class="row mb-3">
+<!--                  col-form-label text-light-->
+<!--                  <label class="col-form-label text-light">First name(s)</label>-->
+
+                  <label class="col-sm-5 col-form-label">First name(s)</label>
+                  <div class="col-sm-7">
+                    <input type="text"
+                           th:field="*{customerGroup.firstName}"
+                           class="form-control">
+
+<!--                    <input type="text" class="form-control" id="name" name="name" value="mister" fdprocessedid="0v286n">-->
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-5 col-form-label">Last name</label>
+                  <div class="col-sm-7">
+                    <input type="text"
+                           th:field="*{customerGroup.lastName}"
+                           class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-5">
+                  <label class="col-sm-5 col-form-label">Phone number</label>
+                  <div class="col-sm-7">
+                    <input type="number"
+                           th:field="*{customerGroup.phoneNumber}"
+                           class="form-control"
+                           th:classappend="${#fields.hasErrors('customerGroup.phoneNumber')} ? ' is-invalid'"/>
+                      <div class="invalid-feedback"
+                           th:if="${#fields.hasErrors('customerGroup.phoneNumber')}"
+                           th:errors="*{customerGroup.phoneNumber}"></div>
+                  </div>
+                </div>
+                <hr class="mb-4">
+
+<!--                <div class="mb-2">-->
+<!--                  <input type="text" th:field="*{customerGroup.firstName}" class="form-control" placeholder="First name(s)" aria-label="Name" aria-describedby="email-addon">-->
+<!--                </div>-->
+<!--                <div class="mb-2">-->
+<!--                  <input type="text" th:field="*{customerGroup.lastName}" class="form-control" placeholder="Last name" aria-label="Name" aria-describedby="email-addon">-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                  <input type="tel" th:field="*{customerGroup.phoneNumber}" class="form-control" placeholder="Phone number" aria-label="Email" aria-describedby="email-addon">-->
+<!--                </div>-->
+
+                 <p class="mb-3 fw-bold">Reservation information</p>
+<!--                <label> Reservation Information</label>-->
+                <div class="row mb-3">
+                  <label class="col-sm-5 col-form-label">Date & Time</label>
+                  <div class="col-sm-7">
+                    <input type="datetime-local"
+                           th:field="${reservationDTO.reservationDateTime}"
+                           class="form-control"
+                            th:classappend="${dateTimeError} ? ' is-invalid'"/>
+                      <div class="invalid-feedback" th:if="${dateTimeError}" th:text="${dateTimeError}"></div>
+                  </div>
+                </div>
+
+<!--                <div class="row mb-3">-->
+<!--                  <label class="col-sm-5 form-label">Reservation Date & Time</label>-->
+<!--                  <div class="col-sm-7">-->
+<!--                    <input type="datetime-local"-->
+<!--                           th:field="*{reservationDateTime}"-->
+<!--                           class="form-control">-->
+<!--                  </div>-->
+<!--                </div>-->
+
+<!--                remove? -->
+                <div class="row mb-3">
+                  <label class="col-sm-5 col-form-label">Maximum Time (minutes)</label>
+<!--                  <label class="col-sm-5 col-form-label">Reservation Maximum Time (Minutes)</label>-->
+                  <div class="col-sm-7">
+                    <input type="number"
+                           th:field="${reservationDTO.reservationTimeMax}"
+                           class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-sm-5 col-form-label">Start Time</label>
+                  <div class="col-sm-7">
+                    <input type="datetime-local"
+                           th:field="${reservationDTO.reservationTimeStart}"
+                           class="form-control"
+                           th:classappend="${timeOrderError} ? ' is-invalid'"/>
+                      <div class="invalid-feedback" th:if="${timeOrderError}" th:text="${timeOrderError}"></div>
+                  </div>
+                </div>
+
+                <div class="row mb-5">
+                  <label class="col-sm-5 col-form-label">End Time</label>
+                  <div class="col-sm-7">
+                    <input type="datetime-local"
+                           th:field="${reservationDTO.reservationTimeEnd}"
+                           class="form-control"
+                           th:classappend="${durationError} ? ' is-invalid'"/>
+                      <div class="invalid-feedback" th:if="${durationError}" th:text="${durationError}"></div>
+                  </div>
+                </div>
+                <hr class="mb-4">
+
+<!--                ---->
+
+<!--                <div class="mb-2">-->
+<!--                  <label class="form-label">Reservation Date & Time</label>-->
+<!--                  <input type="datetime-local" th:field="${reservationDTO.reservationDateTime}" class="form-control" placeholder="Reservation Date and Time" aria-label="Date and Time" aria-describedby="email-addon">-->
+<!--                </div>-->
+<!--                <div class="mb-2">-->
+<!--                  <label class="form-label">Reservation Maximum Time (Minutes)</label>-->
+<!--                  <input type="number" th:field="${reservationDTO.reservationTimeMax}" class="form-control" placeholder="Max Time" aria-label="Time" aria-describedby="email-addon">-->
+<!--                </div>-->
+
+<!--                <div class="mb-3">-->
+<!--                  <label class="form-label">Reservation Start Time</label>-->
+<!--                  <input type="datetime-local" th:field="${reservationDTO.reservationTimeStart}" class="form-control" placeholder="Start Time" aria-label="Time" aria-describedby="email-addon">-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                  <label class="form-label">Reservation End Time</label>-->
+<!--                  <input type="datetime-local" th:field="${reservationDTO.reservationTimeEnd}" class="form-control" placeholder="End Time" aria-label="Time" aria-describedby="email-addon">-->
+<!--                </div>-->
+
+                 <p class="mb-3 fw-bold">Table information</p>
+<!--                <label>Table information</label>-->
+                <div class="row mb-3">
+                  <label class="col-sm-5 col-form-label">Table Number</label>
+                  <div class="col-sm-7">
+                      <select th:field="*{tableId}" class="form-control" required>
+                      <option value="" disabled selected>Select Table</option>
+                      <th:block th:each="table : ${tables}">
+                          <option th:value="${table.id}"
+                                  th:text="'Table ' + ${table.tableNumber} + ' (Capacity: ' + ${table.capacity} + ')'">
+
+                          </option>
+
+                      </th:block>
+                      </select>
+                      <div class="invalid-feedback" th:if="${tableError}" th:text="${tableError}"></div>
+
+<!--                    <input type="number"-->
+<!--                           th:field="${reservationDTO.tableId}"-->
+<!--                           class="form-control">-->
+                  </div>
+                </div>
+
+
+
+                <div class="row mb-5">
+                  <label class="col-sm-5 col-form-label">Number of People</label>
+                  <div class="col-sm-7">
+                    <input type="number"
+                           th:field="*{customerGroup.numberOfPeople}"
+                           class="form-control"
+                           th:classappend="${#fields.hasErrors('customerGroup.numberOfPeople')} ? ' is-invalid'"/>
+                      <div class="invalid-feedback"
+                           th:if="${#fields.hasErrors('customerGroup.numberOfPeople')}"
+                           th:errors="*{customerGroup.numberOfPeople}"></div>
+
+
+                  </div>
+                </div>
+<!--                ----------------->
+
+<!--                <div class="mb-2">-->
+<!--                  <label class="form-label">Table Number(s)</label>-->
+<!--&lt;!&ndash;                  <input type="number" th:field="${reservationDTO.tableId}" class="form-control" placeholder="Table number(s)">&ndash;&gt;-->
+<!--                  <input type="number" th:field="${reservationDTO.tableId}"-->
+<!--                         class="form-control" placeholder="Table number">-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                  <label class="form-label">Number of People</label>-->
+<!--                  <input type="number" th:field="*{customerGroup.numberOfPeople}" class="form-control" placeholder="Number of guests">-->
+<!--                </div>-->
+
+<!--                <div class="text-center">-->
+<!--                  <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">-->
+<!--                    Create reservation -->
+<!--                  </button>-->
+<!--                </div>-->
+
+                <div class="row mb-2 mt-2">
+                  <div class="col-sm-6 d-grid">
+                    <button type="submit" class="btn btn-primary">Add Reservation</button>
+                  </div>
+
+                  <div class="col-sm-6 d-grid">
+                    <a class="btn btn-outline-primary" href="/reservations">Cancel</a>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+</body>
+
+</html>

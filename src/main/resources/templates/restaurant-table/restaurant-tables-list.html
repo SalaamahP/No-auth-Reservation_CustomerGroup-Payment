@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>RMS - Employees, List</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet"/>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet"/>
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet"/>
+</head>
+
+<body class="g-sidenav-show bg-gray-100" onload="">
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+         navbar-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <h5 class="pt-3 display-6 text-primary">Tables List</h5>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>All Tables</h6>
+
+                        <p>Number of tables: <span th:text="${tables.size()}">None</span></p>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Table Number
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Capacity
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Status
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="table : ${tables}">
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="../assets/img/team-1.jpg" class="avatar avatar-sm me-3"
+                                                     alt="user1">
+                                            </div>
+                                            <div class="d-flex justify-content-center">
+                                                <h6 class="mb-0 text-sm emp-name" th:text="${table.tableNumber + '  ' + table.tableLastCleaned}"></h6>
+
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0" th:text="${table.capacity}"></p>
+                                    </td>
+
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold"
+                                              th:text="${table.status}"></span>
+                                        </span>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <a
+                                                th:href="@{/edit(id=${table.id})}"
+                                                class="text-info font-weight-bold text-xs"
+                                                data-toggle="tooltip"
+                                                data-original-title="Edit table">
+                                            Edit
+                                        </a>
+                                    </td>
+
+
+                                    <td class="align-middle">
+                                        <a
+                                                th:href="@{tables/delete(id=${table.tableId})}"
+                                                class="text-danger font-weight-bold text-xs"
+                                                data-toggle="tooltip"
+                                                onclick="return confirm('Are you sure?')"
+                                        >
+                                            Remove
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="sidenav-footer mx-3 col-12 col-md-6">
+                    <a class="btn bg-gradient-warning mt-4 w-50" href="/tables/add" type="button">
+                        Add a new Table
+                    </a>
+                </div>
+                <!-- this feature is only for managers; this page is also only for managers -->
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="sidenav-footer mx-3 col-12 col-md-6">
+                <a class="btn bg-gradient-primary mt-2 w-50" href="/tables" type="button">
+                    Go back
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+
+</body>
+</html>

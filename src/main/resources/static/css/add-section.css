@@ -1,0 +1,44 @@
+/*
+add-section.css
+===============
+*/
+
+
+  /* .page-header{
+          margin:0 !important;
+          border-radius: 0px;
+        } */
+
+        section{
+          overflow: hidden;
+          /* background-color: red; */
+          background-color: rgba(93, 0, 136, 0.808);
+          background-blend-mode: multiply;
+
+          background-image: url('../assets/img/curved-images/curved14.jpg');
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+
+        }
+
+        section .card{
+          border-radius: 20px;
+              background-color: rgba(0, 0, 0, 0.5);
+        }
+
+
+
+label, .form-label {
+    font-weight: 300;
+    color: white;
+}
+
+h1, h5{
+    color:white;
+}
+
+.text-primary {
+    color: white !important;
+}

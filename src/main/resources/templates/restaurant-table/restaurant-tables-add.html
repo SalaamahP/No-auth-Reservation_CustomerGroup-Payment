@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Add table-details</title>
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <!-- ------------------------------ -->
+      <link rel="stylesheet" href="../css/section-add.css">
+<!--      <link rel="stylesheet" href="../css/add-section.css">-->
+</head>
+
+<body>
+<section class="min-vh-100">
+  <div class="row m-2 mt-4">
+
+    <div class="col-xl-5 col-lg-6 col-md-7 mx-auto">
+      <div class="card z-index-0">
+<!--        <h1 class="p-2 pb-0 pt-4 display-4 text-center text-light">Table</h1>-->
+<!--        <h5 class="lead text-center text-light">Add a new Table</h5>-->
+
+        <h3 class="text-center text-light px-4 pt-5">Add table-details</h3>
+
+        <div class="card-body">
+          <form method="POST" th:object="${tableDTO}">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+
+            <div class="row mb-3">
+              <label class="col-sm-6 col-form-label">Table number</label>
+              <div class="col-sm-6">
+                <input type="number"
+                       th:field="*{tableNumber}"
+                       class="form-control">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-6 col-form-label">Table capacity</label>
+              <div class="col-sm-6">
+                <input type="number"
+                       th:field="*{capacity}"
+                       class="form-control">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-6 col-form-label">Last cleaned</label>
+              <div class="col-sm-6">
+                <input type="datetime-local"
+                       th:field="*{lastCleaned}"
+                       class="form-control">
+              </div>
+            </div>
+
+
+
+            <div class="row mb-5">
+<!--              <label class="text-light">Status</label>-->
+<!--              <div class="mb-3">-->
+<!--                <select class="form-select" th:field="*{status}">-->
+<!--                  <option value="AVAILABLE">Available</option>-->
+<!--                  <option value="OCCUPIED">Occupied</option>-->
+<!--                </select>-->
+<!--              </div>-->
+
+              <label class="col-sm-6 col-form-label">Status</label>
+              <div class="col-sm-6">
+                <select class="form-select" th:field="*{status}">
+                  <option value="AVAILABLE">Available</option>
+                  <option value="OCCUPIED">Occupied</option>
+                </select>
+              </div>
+            </div>
+<!--            ------------------>
+
+<!--            <label class="text-light">Table number</label>-->
+<!--&lt;!&ndash;            or&ndash;&gt;-->
+<!--&lt;!&ndash;            <label class="text-light lead">Table number</label>&ndash;&gt;-->
+<!--            <div class="mb-3">-->
+<!--              <input type="number" class="form-control"-->
+<!--                     th:field="*{tableNumber}"-->
+<!--                     placeholder="Table Number">-->
+<!--            </div>-->
+
+<!--            <label class="text-light">Table capacity</label>-->
+<!--            <div class="mb-3">-->
+<!--              <input type="number" class="form-control"-->
+<!--                     th:field="*{capacity}"-->
+<!--                     placeholder="Capacity">-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
+<!--              &lt;!&ndash;                  <input type="number" class="form-control" placeholder="Phone number" aria-label="Email" aria-describedby="email-addon">&ndash;&gt;-->
+<!--              &lt;!&ndash;                  <input class="form-control" placeholder="Last Cleaned" th:field="*{lastCleaned}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+
+<!--            <label class="text-light">Status</label>-->
+<!--            <div class="mb-3">-->
+<!--              <select class="form-select" th:field="*{status}">-->
+<!--                <option value="AVAILABLE">Available</option>-->
+<!--                <option value="OCCUPIED">Occupied</option>-->
+<!--              </select>-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <label class="text-light lead">Status</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;              <select class="form-select" th:field="${employeeDTO.role}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="Kitchen-staff">Kitchen-staff member</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="Waiter">Waiter</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="Manager">Manager</option>&ndash;&gt;-->
+<!--&lt;!&ndash;              </select>&ndash;&gt;-->
+
+<!--&lt;!&ndash;              <p th:if="${#fields.hasErrors('role')}"&ndash;&gt;-->
+<!--&lt;!&ndash;                 th:errorclass="text-danger"&ndash;&gt;-->
+<!--&lt;!&ndash;                 th:errors="${employeeDTO.role}">&ndash;&gt;-->
+<!--&lt;!&ndash;              </p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+
+<!--            <label class="form-label text-light">Last Cleaned</label>-->
+
+<!--            <div class="mb-3">-->
+<!--&lt;!&ndash;              <label class="form-label text-light lead">Last Cleaned</label>&ndash;&gt;-->
+<!--              <input-->
+<!--                      type="datetime-local"-->
+<!--                      class="form-control"-->
+<!--                      th:field="*{lastCleaned}"-->
+<!--                      placeholder="Select date and time">-->
+<!--            </div>-->
+
+
+<!--            <div class="row mb-3">-->
+<!--              <div class="offset-sm-4 col-sm-4 d-grid">-->
+<!--                <button type="submit" class="btn btn-primary">Add Table</button>-->
+<!--              </div>-->
+
+<!--              <div class="col-sm-4 d-grid">-->
+<!--                <a class="btn btn-outline-primary" href="/tables"-->
+<!--                   role="button">Cancel</a>-->
+<!--              </div>-->
+<!--            </div>-->
+
+
+            <div class="row mb-2">
+              <div class="col-sm-6 d-grid">
+                <button type="submit" class="btn btn-primary">Add table-details</button>
+              </div>
+
+              <div class="col-sm-6 d-grid">
+                <a role="button"
+                   class="btn btn-outline-primary"
+                   href="/tables">Cancel</a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+
+</html>

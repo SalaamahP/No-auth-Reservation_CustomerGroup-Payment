@@ -1,0 +1,88 @@
+/*
+main.css
+========
+Updated: 19.09.25
+========
+*/
+
+/* TEMPLATE-STYLE OVERRIDES */
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    display: block;
+    overflow: auto;
+    height: auto;
+}
+
+.btn.bg-gradient-warning {
+    width: 100px;
+}
+
+.btn.bg-gradient-warning:hover,
+.btn.bg-gradient-warning:focus {
+    background-color: red;
+    transform: scale(0.9);
+}
+
+#search-button:hover,
+#search-button:focus {
+    background-color: red !important;
+}
+/* ------------------------------ */
+
+
+/* BOOTSTRAP OVERRIDES */
+/*
+.navbar {
+    .navbar .nav-link {
+        transition: 400ms ease;
+    }
+
+    .navbar .nav-link:hover {
+        background-color: black;
+        color: white;
+    }
+}
+*/
+    .nav-link{
+      transition:200ms ease;
+    }
+    .nav-link:hover{
+      /* background-color: red; */
+      /* border:1px solid black;  */
+        /* box-shadow: 1px 1px 10px blue; */
+        border-radius: 0.5rem;
+        background-color: white;
+        box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+
+      }
+
+/* card */
+/*
+.card {
+  box-shadow: 0 20px 27px 0 rgb(91 47 130 / 10%);
+  opacity: 0.8;
+  transform: scale(0.9);
+  transition: 400ms ease;
+}
+.card:hover {
+  box-shadow: 0 20px 27px 0 rgb(91 47 130 / 30%);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card .btn-outline-primary:hover {
+  background-color: #cb0c9f;
+  color: white;
+  border-color: #cb0c9f;
+}
+*/
+/* ------------------------------ */
+
+
+/* Custom classes and styles */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ------------------------------ */
+

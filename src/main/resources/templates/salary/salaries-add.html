@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Add Salary-details</title>
+
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <!-- ------------------------------ -->
+    <link rel="stylesheet" href="../css/section-add.css">
+
+</head>
+
+<body>
+  <section class="min-vh-100">
+      <div class="row m-2 mt-4">
+
+        <div class="col-xl-5 col-lg-6 col-md-7 mx-auto">
+          <div class="card z-index-0">
+<!--            <h1 class="p-2 pb-0 pt-4 display-4 text-center text-light">Employee Salary</h1>-->
+<!--            <h5 class="lead text-center text-light">Add a salary details</h5>-->
+
+              <h3 class="text-center text-light px-4 pt-5">Add salary-details</h3>
+
+
+            <div class="card-body">
+              <form role="form text-left" method="POST" th:object="${salaryDTO}">
+
+                  <input type="hidden"
+                         th:name="${_csrf.parameterName}"
+                         th:value="${_csrf.token}" />
+
+                  <div class="row mb-3">
+                      <label class="col-sm-6 col-form-label">Date of previous payment</label>
+                      <div class="col-sm-6">
+                          <input type="datetime-local"
+                                 class="form-control"
+                                 th:value="*{lastPayment}">
+                      </div>
+                  </div>
+
+                  <div class="row mb-3">
+                      <label class="col-sm-6 col-form-label">Amount</label>
+                      <div class="col-sm-6">
+                          <input type="number"
+                                 class="form-control"
+                                 th:field="*{amount}">
+                      </div>
+                  </div>
+
+                  <div class="row mb-5">
+                      <label class="col-sm-6 col-form-label">Payment method</label>
+                      <div class="col-sm-6">
+
+                          <select class="form-select" th:field="*{method}">
+                              <option value="Cash">Cash</option>
+                              <option value="EFT">EFT</option>
+                          </select>
+                      </div>
+                  </div>
+
+
+<!--                <div class="mb-3">-->
+<!--                    <label class="text-light lead">Amount</label>-->
+
+<!--                  <input class="form-control"-->
+<!--                         th:field="*{amount}"-->
+<!--                         type="number">-->
+<!--                </div>-->
+
+<!--                  <div class="mb-3">-->
+<!--                      <label class="text-light lead">Payment method</label>-->
+
+<!--                      <select class="form-select" th:field="*{method}">-->
+<!--                          <option value="Cash">Cash</option>-->
+<!--                          <option value="EFT">EFT</option>-->
+<!--                      </select>-->
+<!--                  </div>-->
+
+
+<!--                  <label class="text-light lead">Payment method</label>-->
+<!--                  <div class="mb-3">-->
+<!--                      <select class="form-select" th:field="${method}">-->
+<!--                          <option value="Card">Card</option>-->
+<!--                          <option value="Cash">Cash</option>-->
+<!--                          <option value="EFT">EFT</option>-->
+<!--                      </select>-->
+<!--                  </div>-->
+
+
+<!--                <div class="mb-3">-->
+<!--                  <input class="form-control"-->
+<!--                         th:field="*{employeePaymentMethod}"-->
+<!--                         placeholder="Payment Method">-->
+<!--                </div>-->
+
+
+<!--                  <div class="mb-3">-->
+<!--                      <input class="form-control"-->
+<!--                             th:field="*{lastPayment}"-->
+<!--                             placeholder="Last Payment">-->
+<!--                  </div>-->
+
+
+<!--                <div class="row mb-3">-->
+<!--                  <div class="offset-sm-4 col-sm-4 d-grid">-->
+<!--                    <button type="submit" class="btn btn-primary">Add salary details</button>-->
+<!--                  </div>-->
+
+<!--                  <div class="col-sm-4 d-grid">-->
+<!--                    <a class="btn btn-outline-primary"-->
+<!--                       href="/employee-salaries"-->
+<!--                       role="button">-->
+<!--                        Cancel-->
+<!--                    </a>-->
+<!--                  </div>-->
+
+                    <!-- buttons -->
+                    <div class="row mb-2">
+                        <div class="col-sm-6 d-grid">
+                            <button type="submit" class="btn btn-primary">Add salary-details</button>
+                        </div>
+
+                        <div class="col-sm-6 d-grid">
+                            <a class="btn btn-outline-primary" href="/employee-salaries">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+</body>
+
+</html>

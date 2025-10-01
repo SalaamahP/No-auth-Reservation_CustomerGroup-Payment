@@ -1,0 +1,54 @@
+/*
+section-edit.css
+================
+*/
+
+/* SECTION */
+section {
+  overflow: hidden;
+  background-color: rgba(93, 0, 136, 0.808);
+  background-blend-mode: multiply;
+  background-image: url('../assets/img/curved-images/curved14.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  .card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px rgb(0, 0, 0);
+    transition:400ms ease;
+    :hover {
+      box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* .card:hover {
+    box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.1);
+  } */
+}
+
+.form-control-plaintext {
+  outline: none;
+  color: #cb0c9f;
+}
+
+.col-form-label {
+  font-weight: 300;
+  color: white;
+  margin: 0px;
+}
+
+/*
+  p{
+          margin:0;
+          color:white;
+        }
+*/
+
+.button-section {
+  a {
+    display: block;
+  }
+}
