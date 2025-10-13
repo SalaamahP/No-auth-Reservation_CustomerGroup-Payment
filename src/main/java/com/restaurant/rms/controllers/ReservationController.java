@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/reservations")
@@ -57,6 +59,8 @@ public class ReservationController {
 
         List<RestaurantTable> tables = restaurantTableRepo.findAll();
         model.addAttribute("tables", tables);
+
+        model.addAttribute("reservedTables", List.of());
         return "reservation/reservations-add";
     }
 
@@ -67,6 +71,19 @@ public class ReservationController {
             Model model
     ) {
         List<RestaurantTable> tables = restaurantTableRepo.findAll();
+        List<Integer> reservedTables = List.of();
+
+        if (rDTO.getReservationTimeStart() != null && rDTO.getReservationTimeEnd() != null) {
+            reservedTables = reservationRepo.findByDoubleBooking(
+                    rDTO.getReservationTimeStart(), rDTO.getReservationTimeEnd()
+            ).stream()
+                    .map(res -> res.getRestaurantTable().getId())
+                    .collect(Collectors.toList());
+
+
+        }
+        model.addAttribute("tables", tables);
+        model.addAttribute("reservedTables", reservedTables);
 
         if (rDTO.getReservationDateTime() != null && rDTO.getReservationDateTime().isBefore(LocalDateTime.now())) {
             model.addAttribute("dateTimeError", "Reservation date/time is before current date.");
@@ -136,10 +153,18 @@ public class ReservationController {
         }
 
 
-        boolean exists = reservationRepo.existsByReservationDateTimeAndRestaurantTable(rDTO.getReservationDateTime(), tableOpt.get());
+        boolean exists = false;
+        if (rDTO.getReservationTimeStart() != null && rDTO.getReservationTimeEnd() != null) {
+            exists = reservationRepo.findByDoubleBooking(rDTO.getReservationTimeStart(), rDTO.getReservationTimeEnd())
+                    .stream()
+                    .anyMatch(res -> res.getRestaurantTable().getId()== tableOpt.get().getId());
+        }
+
         if (exists) {
             model.addAttribute("doubleErrors", "Table already reserved for selected date/time.");
             model.addAttribute("tables", tables);
+            model.addAttribute("reservationDTO", rDTO);
+            model.addAttribute("reservedTables", reservedTables);
             return "reservation/reservations-add";
         }
         UUID rId = UUID.randomUUID();
@@ -204,8 +229,23 @@ public class ReservationController {
 
             model.addAttribute("reservationDTO", reservationDTO);
 
+
+
             List<RestaurantTable> tables = restaurantTableRepo.findAll();
+
+            Set<Integer> reservedTables = Set.of();
+            if (reservationDTO.getReservationTimeStart() != null && reservationDTO.getReservationTimeEnd() != null) {
+                reservedTables = reservationRepo
+                        .findByDoubleBooking(reservationDTO.getReservationTimeStart(), reservationDTO.getReservationTimeEnd())
+                        .stream()
+                        .filter(r -> !r.getId().equals(reservation.getId()))
+                        .map(r -> r.getRestaurantTable().getId())
+                        .collect(Collectors.toSet());
+            }
+
+
             model.addAttribute("tables", tables);
+            model.addAttribute("reservedTables", reservedTables);
 
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
@@ -244,6 +284,7 @@ public class ReservationController {
         }
 
         if (result.hasErrors()) {
+            model.addAttribute("reservationDTO", resDTO);
             model.addAttribute("tables", tables);
             return "reservation/reservations-edit";
         }
@@ -274,9 +315,14 @@ public class ReservationController {
             reservation.setRestaurantTable(table);
 
 
-            boolean exists = reservationRepo.existsByReservationDateTimeAndRestaurantTable( resDTO.getReservationDateTime(), table);
-            if (exists && ! reservation.getReservationDateTime().equals(resDTO.getReservationDateTime())) {
-                model.addAttribute("doubleError", "Existing reservation at selected table and date/time.");
+            boolean exists = reservationRepo.findByDoubleBooking(
+                    resDTO.getReservationTimeStart(), resDTO.getReservationTimeEnd()
+            ).stream()
+                    .filter(r -> !r.getId().equals(resDTO.getId()))
+                    .anyMatch(r -> r.getRestaurantTable().getId() == resDTO.getTableId());
+
+            if (exists) {
+                model.addAttribute("doubleErrors", "Table already reserved for selected date/time.");
                 model.addAttribute("tables", tables);
                 return "reservation/reservations-edit";
             }

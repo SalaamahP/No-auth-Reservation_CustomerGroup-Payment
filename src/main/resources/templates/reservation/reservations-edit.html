@@ -78,34 +78,29 @@ margin: 0px;
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">First Name(s)</label>
                             <div class="col-sm-7">
-                                <input class="form-control" th:field="*{customerGroup.firstName}">
-                                <p th:if="${#fields.hasErrors('customerGroup.firstName')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{customerGroup.firstName}"
-                                >
-                                </p>
+                                <input class="form-control" th:field="*{customerGroup.firstName}"
+                                th:classappend="${#fields.hasErrors('customerGroup.firstName')} ? ' is-invalid'"/>
+                                <div class="invalid-feedback" th:errors="*{customerGroup.firstName}"></div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Last Name</label>
                             <div class="col-sm-7">
-                                <input class="form-control" th:field="*{customerGroup.lastName}">
-                                <p th:if="${#fields.hasErrors('customerGroup.lastName')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{customerGroup.lastName}">
-                                </p>
+                                <input class="form-control" th:field="*{customerGroup.lastName}"
+                                th:classappend="${#fields.hasErrors('customerGroup.lastName')} ? ' is-invalid'"/>
+                                <div class="invalid-feedback" th:errors="*{customerGroup.lastName}"></div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Phone Number</label>
                             <div class="col-sm-7">
-                                <input class="form-control" th:field="*{customerGroup.phoneNumber}">
-                                <p th:if="${#fields.hasErrors('customerGroup.phoneNumber')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{customerGroup.phoneNumber}">
-                                </p>
+                                <input class="form-control" th:field="*{customerGroup.phoneNumber}"
+                                       th:classappend="${#fields.hasErrors('customerGroup.phoneNumber')} ? ' is-invalid'"/>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('customerGroup.phoneNumber')}"
+                                     th:errors="*{customerGroup.phoneNumber}"></div>
                             </div>
                         </div>
                         <hr class="mb-4">
@@ -113,71 +108,86 @@ margin: 0px;
 
                         <p class="mb-3 fw-bold">Reservation information</p>
                         <div class="row mb-3">
+
                             <label class="col-sm-5 col-form-label">Reservation Date and Time</label>
                             <div class="col-sm-7">
 <!--                                <input type="datetime-local" class="form-control"-->
-                                <input type="text"
+                                <input type="datetime-local"
                                        class="form-control"
-                                       th:field="*{reservationDateTime}">
-                                <p th:if="${#fields.hasErrors('reservationDateTime')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{reservationDateTime}">
-                                </p>
+
+                                       th:value="${#temporals.format(reservationDTO.reservationDateTime, 'yyyy-MM-dd') + 'T' + #temporals.format(reservationDTO.reservationDateTime, 'HH:mm')}"
+                                       name="reservationDateTime"
+                                       th:classappend="${dateTimeError !=null or #fields.hasErrors('reservationDateTime')} ? 'is-invalid' : ''"/>
+
+                                <div class="invalid-feedback" th:if="${dateTimeError}" th:text="${dateTimeError}"></div>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('reservationDateTime')}" th:errors="*{reservationDateTime}"></div>
+
+
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Maximum Reservation Time</label>
                             <div class="col-sm-7">
-                                <input type="number" class="form-control" th:field="*{reservationTimeMax}">
-                                <p th:if="${#fields.hasErrors('reservationTimeMax')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{reservationTimeMax}">
-                                </p>
+                                <input type="number" class="form-control" th:field="*{reservationTimeMax}"
+                                       th:classappend="${#fields.hasErrors('reservationTimeMax')} ? 'is-invalid' : ''"/>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('reservationTimeMax')}"  th:errors="*{reservationTimeMax}"></div>
+
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Reservation Time Start</label>
                             <div class="col-sm-7">
-                                <input class="form-control" th:field="*{reservationTimeStart}">
-                                <p th:if="${#fields.hasErrors('reservationTimeStart')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{reservationTimeStart}">
-                                </p>
+                                <input type="datetime-local" class="form-control"
+                                th:value="${#temporals.format(reservationDTO.reservationTimeStart, 'yyyy-MM-dd') + 'T' + #temporals.format(reservationDTO.reservationTimeStart, 'HH:mm')}"
+                                       name="reservationTimeStart"
+
+                                       th:classappend="${timeOrderError !=null or #fields.hasErrors('reservationTimeStart')} ? 'is-invalid' : ''"/>
+
+                                <div class="invalid-feedback" th:if="${timeOrderError}" th:text="${timeOrderError}"></div>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('reservationTimeStart')}" th:errors="*{reservationTimeStart}"></div>
+
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Reservation Time End</label>
                             <div class="col-sm-7">
-                                <input class="form-control" th:field="*{reservationTimeEnd}">
-                                <p th:if="${#fields.hasErrors('reservationTimeEnd')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{reservationTimeEnd}">
-                                </p>
+                                <input type="datetime-local" class="form-control"
+                                       th:value="${#temporals.format(reservationDTO.reservationTimeEnd, 'yyyy-MM-dd') + 'T' + #temporals.format(reservationDTO.reservationTimeEnd, 'HH:mm')}"
+                                       name="reservationTimeEnd"
+
+                                       th:classappend="${durationError !=null or #fields.hasErrors('reservationTimeEnd')} ? 'is-invalid' : ''"/>
+
+                                <div class="invalid-feedback" th:if="${durationError}" th:text="${durationError}"></div>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('reservationTimeEnd')}" th:errors="*{reservationTimeEnd}"></div>
+
                             </div>
                         </div>
                         <hr class="mb-4">
 
 
                         <p class="mb-3 fw-bold">Table information</p>
+                        <!--                <label>Table information</label>-->
                         <div class="row mb-3">
                             <label class="col-sm-5 col-form-label">Table Number</label>
                             <div class="col-sm-7">
                                 <select th:field="*{tableId}" class="form-control" required>
-                                    <option value="" disabled>Select Table</option>
+                                    <option value="" disabled selected>Select Table</option>
                                     <th:block th:each="table : ${tables}">
                                         <option th:value="${table.id}"
-                                                th:text="'Table ' + ${table.tableNumber} + ' (Capacity: ' + ${table.capacity} + ')'"
-                                                th:selected="${table.id} == ${reservationDTO.tableId}">
+                                                th:text="'Table ' + ${table.tableNumber} + ' (Capacity: ' + ${table.capacity} + ')'">
 
                                         </option>
 
                                     </th:block>
                                 </select>
+                                <div class="invalid-feedback" th:if="${tableError}" th:text="${tableError}"></div>
 
-                              <p th:if="${#fields.hasErrors('tableId')}" th:errors="*{tableId}" class="text-danger"></p>
+                                <!--                    <input type="number"-->
+                                <!--                           th:field="${reservationDTO.tableId}"-->
+                                <!--                           class="form-control">-->
                             </div>
                         </div>
 
@@ -188,11 +198,12 @@ margin: 0px;
                             <div class="col-sm-7">
                                 <input type="number"
                                        class="form-control"
-                                       th:field="*{customerGroup.numberOfPeople}">
-                                <p th:if="${#fields.hasErrors('customerGroup.numberOfPeople')}"
-                                   th:errorclass="text-danger"
-                                   th:errors="*{customerGroup.numberOfPeople}">
-                                </p>
+                                       th:field="*{customerGroup.numberOfPeople}"
+                                       th:classappend="${#fields.hasErrors('customerGroup.numberOfPeople')} ? ' is-invalid'"/>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('customerGroup.numberOfPeople')}"
+                                     th:errors="*{customerGroup.numberOfPeople}"></div>
+
                             </div>
                         </div>
 

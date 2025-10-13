@@ -11,24 +11,24 @@ public class ReservationDTO {
 
     private ReservationId id;
 
-//    @NotNull(message = "Field cannot be empty")
+ @NotNull(message = "Reservation Date and Time cannot be empty")
     private LocalDateTime reservationDateTime;
 
-//    @NotNull(message = "Field cannot be empty")
-    private int reservationTimeMax;
+ @NotNull(message = "Please enter maximum reservation time")
+ @Min(value = 1, message = "Please enter a valid time")
+    private Integer reservationTimeMax;
 
-//    @NotNull(message = "Field cannot be empty")
+ @NotNull(message = "Reservation Start Time cannot be empty")
     private LocalDateTime reservationTimeStart;
 
-//    @NotNull(message = "Field cannot be empty")
+  @NotNull(message = "Reservation End Time cannot be empty")
     private LocalDateTime reservationTimeEnd;
 
-//    @Min(value = 1, message = "Table Id must be a positive number")
+ @Min(value = 1, message = "Table Id must be a positive number")
     private Integer tableId;
 
     @Valid
-//    @NotNull
-    private CustomerGroupDTO customerGroup = new CustomerGroupDTO();
+    private CustomerGroupDTO customerGroup ;
 
 
     public ReservationId getId() {
@@ -48,11 +48,11 @@ public class ReservationDTO {
     }
 
 
-    public int getReservationTimeMax() {
+    public Integer getReservationTimeMax() {
         return reservationTimeMax;
     }
 
-    public void setReservationTimeMax(int reservationTimeMax) {
+    public void setReservationTimeMax(Integer reservationTimeMax) {
         this.reservationTimeMax = reservationTimeMax;
     }
 
