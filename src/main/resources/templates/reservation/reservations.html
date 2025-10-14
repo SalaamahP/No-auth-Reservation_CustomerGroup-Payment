@@ -372,9 +372,9 @@
 
                                     <td class="align-middle text-center text-sm">
                                     <span th:classappend="
-                                    ${reservation.restaurantTable?.status} == 'OCCUPIED' ? ' badge-sm bg-gradient-success' :
-                                    (${reservation.restaurantTable?.status} == 'AVAILABLE' ? ' badge-sm bg-gradient-info' :
-                                    ' badge-sm bg-gradient-secondary')"
+                                    ${reservation.restaurantTable?.status} == 'OCCUPIED' ? ' badge rounded-pill badge-sm bg-gradient-info' :
+                                    (${reservation.restaurantTable?.status} == 'AVAILABLE' ? ' badge rounded-pill badge-sm bg-gradient-success' :
+                                    ' badge rounded-pill badge-sm bg-gradient-secondary')"
                                           th:text="${reservation.restaurantTable?.status}"></span></td>
 
 
