@@ -368,7 +368,17 @@
                                         <h6 class="mb-0 text-sm"
                                             th:text="${reservation.getCustomerGroup().getNumberOfPeople()}"></h6>
 
-                                    </td> <td class="align-middle text-center text-sm"> <span class="badge badge-sm bg-gradient-success">Occupied</span> </td>
+                                    </td>
+
+                                    <td class="align-middle text-center text-sm">
+                                    <span th:classappend="
+                                    ${reservation.restaurantTable?.status} == 'OCCUPIED' ? ' badge-sm bg-gradient-success' :
+                                    (${reservation.restaurantTable?.status} == 'AVAILABLE' ? ' badge-sm bg-gradient-info' :
+                                    ' badge-sm bg-gradient-secondary')"
+                                          th:text="${reservation.restaurantTable?.status}"></span></td>
+
+
+
 
                                     <td class="align-middle text-center">
                                         <h6 class="mb-0 text-sm" th:text="${reservation.reservationDateTime}"></h6>

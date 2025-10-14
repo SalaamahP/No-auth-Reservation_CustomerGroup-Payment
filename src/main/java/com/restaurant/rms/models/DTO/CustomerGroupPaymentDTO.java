@@ -8,7 +8,7 @@ public class CustomerGroupPaymentDTO {
   @NotNull
     private int paymentId;
    @NotNull(message= "Payment date and time is required")
-   @FutureOrPresent(message = "Payment date and time cannot be in past/future")
+   @PastOrPresent(message = "Payment date and time cannot be in future")
     private LocalDateTime paymentDateTime;
 
    @NotNull(message="Please enter a payment amount")
