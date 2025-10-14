@@ -46,18 +46,31 @@
                         <div class="row mb-3">
                             <label class="col-sm-6 col-form-label">Date and time of payment</label>
                             <div class="col-sm-6">
-                                <input type="datetime-local"
-                                       th:field="*{paymentDateTime}"
-                                       class="form-control">
+                                <input type="datetime-local" class="form-control"
+                                       th:value="${#temporals.format(customerGroupPaymentDTO.paymentDateTime, 'yyyy-MM-dd') + 'T' + #temporals.format(customerGroupPaymentDTO.paymentDateTime, 'HH:mm')}"
+                                       name="paymentDateTime"
+                                       th:classappend="${#fields.hasErrors('paymentDateTime')} ? 'is-invalid' : ''" >
+
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('paymentDateTime')}"
+                                     th:errors="*{paymentDateTime}">
+                                </div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-6 col-form-label">Amount</label>
                             <div class="col-sm-6">
-                                <input type="number"
+                                <input type="number"  class="form-control"
                                        th:field="*{paymentAmount}"
-                                       class="form-control">
+
+                                th:classappend="${#fields.hasErrors('paymentAmount')} ? 'is-invalid' : ''" >
+
+
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('paymentAmount')}"
+                                     th:errors="*{paymentAmount}"></div>
+
                             </div>
                         </div>
 
@@ -65,12 +78,16 @@
                             <label class="col-sm-6 col-form-label">Transaction Type</label>
                             <div class="col-sm-6">
                                 <select class="form-control"
-                                        th:field="*{paymentTransactionType}">
+                                        th:field="*{paymentTransactionType}"
+                                        th:classappend="${#fields.hasErrors('paymentTransactionType')} ? 'is-invalid' : ''" >
 <!--                                        style="max-width:250px;">-->
                                     <option value="Cash">Cash</option>
                                     <option value="Debit/Credit">Credit/Debit Card</option>
                                     <option value="Mobile Wallet">Apple Pay</option>
                                 </select>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('paymentTransactionType')}"
+                                     th:errors="*{paymentTransactionType}"></div>
                             </div>
                         </div>
 

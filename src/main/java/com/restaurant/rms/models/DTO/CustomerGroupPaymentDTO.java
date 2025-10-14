@@ -1,22 +1,25 @@
 package com.restaurant.rms.models.DTO;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
 
 public class CustomerGroupPaymentDTO {
-//    @NotNull
+  @NotNull
     private int paymentId;
-
-//    @NotNull
+   @NotNull(message= "Payment date and time is required")
+   @FutureOrPresent(message = "Payment date and time cannot be in past/future")
     private LocalDateTime paymentDateTime;
 
-    private double paymentAmount;
+   @NotNull(message="Please enter a payment amount")
+   @Positive(message = "Payment amount must be greater than 0")
 
-    //    @NotEmpty
+    private Double paymentAmount;
+
+    @NotBlank(message= "Please select a transaction type")
     private String paymentTransactionType;
 
+    @NotNull(message= "Customer group ID is required")
     private int customerGroupId;
 
     public int getPaymentId() {
@@ -32,11 +35,11 @@ public class CustomerGroupPaymentDTO {
         this.paymentDateTime = paymentDateTime;
 
     }
-    public double getPaymentAmount() {
+    public Double getPaymentAmount() {
         return paymentAmount;
 
     }
-    public void setPaymentAmount(double paymentAmount) {
+    public void setPaymentAmount(Double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
     public String getPaymentTransactionType() {
